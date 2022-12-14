@@ -1,0 +1,442 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Хранилище P_Faskhieva_MobileProjectModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="PlantCare">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PlantCare" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PlantLighting">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Lighting" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Plants">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Title" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Description" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Photo" Type="nvarchar(max)" />
+          <Property Name="IdType" Type="int" Nullable="false" />
+          <Property Name="IdCare" Type="int" Nullable="false" />
+          <Property Name="IdWatering" Type="int" Nullable="false" />
+          <Property Name="IdLighting" Type="int" Nullable="false" />
+          <Property Name="IdSpraying" Type="int" Nullable="false" />
+          <Property Name="IdSpecies" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SprayingPlants">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Spraying" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Type">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Type" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Views">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Views" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="WateringPlants">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="WateringPlants" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Plants_Kinds">
+          <End Role="Views" Type="Self.Views" Multiplicity="1" />
+          <End Role="Plants" Type="Self.Plants" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Views">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Plants">
+              <PropertyRef Name="IdSpecies" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Plants_PlantCare">
+          <End Role="PlantCare" Type="Self.PlantCare" Multiplicity="1" />
+          <End Role="Plants" Type="Self.Plants" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PlantCare">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Plants">
+              <PropertyRef Name="IdCare" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Plants_PlantLighting">
+          <End Role="PlantLighting" Type="Self.PlantLighting" Multiplicity="1" />
+          <End Role="Plants" Type="Self.Plants" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PlantLighting">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Plants">
+              <PropertyRef Name="IdLighting" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Plants_SprayingPlants">
+          <End Role="SprayingPlants" Type="Self.SprayingPlants" Multiplicity="1" />
+          <End Role="Plants" Type="Self.Plants" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SprayingPlants">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Plants">
+              <PropertyRef Name="IdSpraying" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Plants_Type">
+          <End Role="Type" Type="Self.Type" Multiplicity="1" />
+          <End Role="Plants" Type="Self.Plants" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Type">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Plants">
+              <PropertyRef Name="IdType" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Plants_WateringPlants">
+          <End Role="WateringPlants" Type="Self.WateringPlants" Multiplicity="1" />
+          <End Role="Plants" Type="Self.Plants" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="WateringPlants">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Plants">
+              <PropertyRef Name="IdWatering" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Хранилище P_Faskhieva_MobileProjectModelContainer">
+          <EntitySet Name="PlantCare" EntityType="Self.PlantCare" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PlantLighting" EntityType="Self.PlantLighting" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Plants" EntityType="Self.Plants" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SprayingPlants" EntityType="Self.SprayingPlants" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Type" EntityType="Self.Type" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Views" EntityType="Self.Views" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="WateringPlants" EntityType="Self.WateringPlants" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Plants_Kinds" Association="Self.FK_Plants_Kinds">
+            <End Role="Views" EntitySet="Views" />
+            <End Role="Plants" EntitySet="Plants" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Plants_PlantCare" Association="Self.FK_Plants_PlantCare">
+            <End Role="PlantCare" EntitySet="PlantCare" />
+            <End Role="Plants" EntitySet="Plants" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Plants_PlantLighting" Association="Self.FK_Plants_PlantLighting">
+            <End Role="PlantLighting" EntitySet="PlantLighting" />
+            <End Role="Plants" EntitySet="Plants" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Plants_SprayingPlants" Association="Self.FK_Plants_SprayingPlants">
+            <End Role="SprayingPlants" EntitySet="SprayingPlants" />
+            <End Role="Plants" EntitySet="Plants" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Plants_Type" Association="Self.FK_Plants_Type">
+            <End Role="Type" EntitySet="Type" />
+            <End Role="Plants" EntitySet="Plants" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Plants_WateringPlants" Association="Self.FK_Plants_WateringPlants">
+            <End Role="WateringPlants" EntitySet="WateringPlants" />
+            <End Role="Plants" EntitySet="Plants" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="P_Faskhieva_MobileProjectModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="PlantCare">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PlantCare1" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Plants" Relationship="Self.FK_Plants_PlantCare" FromRole="PlantCare" ToRole="Plants" />
+        </EntityType>
+        <EntityType Name="PlantLighting">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Lighting" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Plants" Relationship="Self.FK_Plants_PlantLighting" FromRole="PlantLighting" ToRole="Plants" />
+        </EntityType>
+        <EntityType Name="Plants">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Title" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Photo" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="IdType" Type="Int32" Nullable="false" />
+          <Property Name="IdCare" Type="Int32" Nullable="false" />
+          <Property Name="IdWatering" Type="Int32" Nullable="false" />
+          <Property Name="IdLighting" Type="Int32" Nullable="false" />
+          <Property Name="IdSpraying" Type="Int32" Nullable="false" />
+          <Property Name="IdSpecies" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="PlantCare" Relationship="Self.FK_Plants_PlantCare" FromRole="Plants" ToRole="PlantCare" />
+          <NavigationProperty Name="PlantLighting" Relationship="Self.FK_Plants_PlantLighting" FromRole="Plants" ToRole="PlantLighting" />
+          <NavigationProperty Name="Views" Relationship="Self.FK_Plants_Kinds" FromRole="Plants" ToRole="Views" />
+          <NavigationProperty Name="SprayingPlants" Relationship="Self.FK_Plants_SprayingPlants" FromRole="Plants" ToRole="SprayingPlants" />
+          <NavigationProperty Name="Type" Relationship="Self.FK_Plants_Type" FromRole="Plants" ToRole="Type" />
+          <NavigationProperty Name="WateringPlants" Relationship="Self.FK_Plants_WateringPlants" FromRole="Plants" ToRole="WateringPlants" />
+        </EntityType>
+        <EntityType Name="SprayingPlants">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Spraying" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Plants" Relationship="Self.FK_Plants_SprayingPlants" FromRole="SprayingPlants" ToRole="Plants" />
+        </EntityType>
+        <EntityType Name="Type">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Type1" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Plants" Relationship="Self.FK_Plants_Type" FromRole="Type" ToRole="Plants" />
+        </EntityType>
+        <EntityType Name="Views">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Views1" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Plants" Relationship="Self.FK_Plants_Kinds" FromRole="Views" ToRole="Plants" />
+        </EntityType>
+        <EntityType Name="WateringPlants">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="WateringPlants1" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Plants" Relationship="Self.FK_Plants_WateringPlants" FromRole="WateringPlants" ToRole="Plants" />
+        </EntityType>
+        <Association Name="FK_Plants_PlantCare">
+          <End Role="PlantCare" Type="Self.PlantCare" Multiplicity="1" />
+          <End Role="Plants" Type="Self.Plants" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PlantCare">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Plants">
+              <PropertyRef Name="IdCare" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Plants_PlantLighting">
+          <End Role="PlantLighting" Type="Self.PlantLighting" Multiplicity="1" />
+          <End Role="Plants" Type="Self.Plants" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PlantLighting">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Plants">
+              <PropertyRef Name="IdLighting" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Plants_Kinds">
+          <End Role="Views" Type="Self.Views" Multiplicity="1" />
+          <End Role="Plants" Type="Self.Plants" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Views">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Plants">
+              <PropertyRef Name="IdSpecies" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Plants_SprayingPlants">
+          <End Role="SprayingPlants" Type="Self.SprayingPlants" Multiplicity="1" />
+          <End Role="Plants" Type="Self.Plants" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SprayingPlants">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Plants">
+              <PropertyRef Name="IdSpraying" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Plants_Type">
+          <End Role="Type" Type="Self.Type" Multiplicity="1" />
+          <End Role="Plants" Type="Self.Plants" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Type">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Plants">
+              <PropertyRef Name="IdType" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Plants_WateringPlants">
+          <End Role="WateringPlants" Type="Self.WateringPlants" Multiplicity="1" />
+          <End Role="Plants" Type="Self.Plants" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="WateringPlants">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Plants">
+              <PropertyRef Name="IdWatering" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="PlantsEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="PlantCare" EntityType="Self.PlantCare" />
+          <EntitySet Name="PlantLighting" EntityType="Self.PlantLighting" />
+          <EntitySet Name="Plants" EntityType="Self.Plants" />
+          <EntitySet Name="SprayingPlants" EntityType="Self.SprayingPlants" />
+          <EntitySet Name="Type" EntityType="Self.Type" />
+          <EntitySet Name="Views" EntityType="Self.Views" />
+          <EntitySet Name="WateringPlants" EntityType="Self.WateringPlants" />
+          <AssociationSet Name="FK_Plants_PlantCare" Association="Self.FK_Plants_PlantCare">
+            <End Role="PlantCare" EntitySet="PlantCare" />
+            <End Role="Plants" EntitySet="Plants" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Plants_PlantLighting" Association="Self.FK_Plants_PlantLighting">
+            <End Role="PlantLighting" EntitySet="PlantLighting" />
+            <End Role="Plants" EntitySet="Plants" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Plants_Kinds" Association="Self.FK_Plants_Kinds">
+            <End Role="Views" EntitySet="Views" />
+            <End Role="Plants" EntitySet="Plants" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Plants_SprayingPlants" Association="Self.FK_Plants_SprayingPlants">
+            <End Role="SprayingPlants" EntitySet="SprayingPlants" />
+            <End Role="Plants" EntitySet="Plants" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Plants_Type" Association="Self.FK_Plants_Type">
+            <End Role="Type" EntitySet="Type" />
+            <End Role="Plants" EntitySet="Plants" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Plants_WateringPlants" Association="Self.FK_Plants_WateringPlants">
+            <End Role="WateringPlants" EntitySet="WateringPlants" />
+            <End Role="Plants" EntitySet="Plants" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Хранилище P_Faskhieva_MobileProjectModelContainer" CdmEntityContainer="PlantsEntities">
+          <EntitySetMapping Name="PlantCare">
+            <EntityTypeMapping TypeName="P_Faskhieva_MobileProjectModel.PlantCare">
+              <MappingFragment StoreEntitySet="PlantCare">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="PlantCare1" ColumnName="PlantCare" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PlantLighting">
+            <EntityTypeMapping TypeName="P_Faskhieva_MobileProjectModel.PlantLighting">
+              <MappingFragment StoreEntitySet="PlantLighting">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Lighting" ColumnName="Lighting" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Plants">
+            <EntityTypeMapping TypeName="P_Faskhieva_MobileProjectModel.Plants">
+              <MappingFragment StoreEntitySet="Plants">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Photo" ColumnName="Photo" />
+                <ScalarProperty Name="IdType" ColumnName="IdType" />
+                <ScalarProperty Name="IdCare" ColumnName="IdCare" />
+                <ScalarProperty Name="IdWatering" ColumnName="IdWatering" />
+                <ScalarProperty Name="IdLighting" ColumnName="IdLighting" />
+                <ScalarProperty Name="IdSpraying" ColumnName="IdSpraying" />
+                <ScalarProperty Name="IdSpecies" ColumnName="IdSpecies" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SprayingPlants">
+            <EntityTypeMapping TypeName="P_Faskhieva_MobileProjectModel.SprayingPlants">
+              <MappingFragment StoreEntitySet="SprayingPlants">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Spraying" ColumnName="Spraying" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Type">
+            <EntityTypeMapping TypeName="P_Faskhieva_MobileProjectModel.Type">
+              <MappingFragment StoreEntitySet="Type">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Type1" ColumnName="Type" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Views">
+            <EntityTypeMapping TypeName="P_Faskhieva_MobileProjectModel.Views">
+              <MappingFragment StoreEntitySet="Views">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Views1" ColumnName="Views" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="WateringPlants">
+            <EntityTypeMapping TypeName="P_Faskhieva_MobileProjectModel.WateringPlants">
+              <MappingFragment StoreEntitySet="WateringPlants">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="WateringPlants1" ColumnName="WateringPlants" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
