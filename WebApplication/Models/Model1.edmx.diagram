@@ -5,19 +5,19 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="0366f7db4f5e4ae5af9deb714eb37ea6" Name="Diagram1">
-        <EntityTypeShape EntityType="P_Faskhieva_MobileProjectModel.PlantCare" Width="1.5" PointX="0.75" PointY="2.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="P_Faskhieva_MobileProjectModel.PlantLighting" Width="1.5" PointX="0.75" PointY="5.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="P_Faskhieva_MobileProjectModel.Plants" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
-        <EntityTypeShape EntityType="P_Faskhieva_MobileProjectModel.SprayingPlants" Width="1.5" PointX="0.75" PointY="7.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="P_Faskhieva_MobileProjectModel.Type" Width="1.5" PointX="0.75" PointY="10.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="P_Faskhieva_MobileProjectModel.Views" Width="1.5" PointX="0.75" PointY="12.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="P_Faskhieva_MobileProjectModel.WateringPlants" Width="1.5" PointX="0.75" PointY="14.75" IsExpanded="true" />
-        <AssociationConnector Association="P_Faskhieva_MobileProjectModel.FK_Plants_PlantCare" ManuallyRouted="false" />
-        <AssociationConnector Association="P_Faskhieva_MobileProjectModel.FK_Plants_PlantLighting" ManuallyRouted="false" />
-        <AssociationConnector Association="P_Faskhieva_MobileProjectModel.FK_Plants_Kinds" ManuallyRouted="false" />
-        <AssociationConnector Association="P_Faskhieva_MobileProjectModel.FK_Plants_SprayingPlants" ManuallyRouted="false" />
-        <AssociationConnector Association="P_Faskhieva_MobileProjectModel.FK_Plants_Type" ManuallyRouted="false" />
-        <AssociationConnector Association="P_Faskhieva_MobileProjectModel.FK_Plants_WateringPlants" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="P_Faskhieva_MobileProjectModel.PlantCare" Width="1.5" PointX="0.75" PointY="2.25" />
+        <EntityTypeShape EntityType="P_Faskhieva_MobileProjectModel.PlantLighting" Width="1.5" PointX="0.75" PointY="14.75" />
+        <EntityTypeShape EntityType="P_Faskhieva_MobileProjectModel.Plants" Width="1.5" PointX="3" PointY="1" />
+        <EntityTypeShape EntityType="P_Faskhieva_MobileProjectModel.SprayingPlants" Width="1.5" PointX="0.75" PointY="10.125" />
+        <EntityTypeShape EntityType="P_Faskhieva_MobileProjectModel.TypePlants" Width="1.5" PointX="0.75" PointY="5.375" />
+        <EntityTypeShape EntityType="P_Faskhieva_MobileProjectModel.ViewPlants" Width="1.5" PointX="0.75" PointY="12.5" />
+        <EntityTypeShape EntityType="P_Faskhieva_MobileProjectModel.WateringPlants" Width="1.5" PointX="0.75" PointY="7.75" />
+        <AssociationConnector Association="P_Faskhieva_MobileProjectModel.FK_Plants_PlantCare" />
+        <AssociationConnector Association="P_Faskhieva_MobileProjectModel.FK_Plants_PlantLighting" />
+        <AssociationConnector Association="P_Faskhieva_MobileProjectModel.FK_Plants_Kinds" />
+        <AssociationConnector Association="P_Faskhieva_MobileProjectModel.FK_Plants_SprayingPlants" />
+        <AssociationConnector Association="P_Faskhieva_MobileProjectModel.FK_Plants_Type" />
+        <AssociationConnector Association="P_Faskhieva_MobileProjectModel.FK_Plants_WateringPlants" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

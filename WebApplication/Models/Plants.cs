@@ -27,9 +27,9 @@ namespace WebApplication.Models
     
         public virtual PlantCare PlantCare { get; set; }
         public virtual PlantLighting PlantLighting { get; set; }
-        public virtual Views Views { get; set; }
+        public virtual ViewPlants ViewPlants { get; set; }
         public virtual SprayingPlants SprayingPlants { get; set; }
-        public virtual Type Type { get; set; }
+        public virtual TypePlants TypePlants { get; set; }
         public virtual WateringPlants WateringPlants { get; set; }
     }
 }

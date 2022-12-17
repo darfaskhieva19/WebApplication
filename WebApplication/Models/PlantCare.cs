@@ -21,7 +21,7 @@ namespace WebApplication.Models
         }
     
         public int Id { get; set; }
-        public string PlantCare1 { get; set; }
+        public string Care1 { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Plants> Plants { get; set; }

@@ -29,8 +29,8 @@ namespace WebApplication.Models
         public virtual DbSet<PlantLighting> PlantLighting { get; set; }
         public virtual DbSet<Plants> Plants { get; set; }
         public virtual DbSet<SprayingPlants> SprayingPlants { get; set; }
-        public virtual DbSet<Type> Type { get; set; }
-        public virtual DbSet<Views> Views { get; set; }
+        public virtual DbSet<TypePlants> TypePlants { get; set; }
+        public virtual DbSet<ViewPlants> ViewPlants { get; set; }
         public virtual DbSet<WateringPlants> WateringPlants { get; set; }
     }
 }

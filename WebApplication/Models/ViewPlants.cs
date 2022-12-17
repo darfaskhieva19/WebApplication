@@ -12,16 +12,16 @@ namespace WebApplication.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Type
+    public partial class ViewPlants
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Type()
+        public ViewPlants()
         {
             this.Plants = new HashSet<Plants>();
         }
     
         public int Id { get; set; }
-        public string Type1 { get; set; }
+        public string Views { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Plants> Plants { get; set; }
