@@ -10,7 +10,7 @@ namespace WebApplication.Models
        public CareModel(PlantCare care)
        {
             Id = care.Id;
-            Care = care.Care1;
+            Care = care.Care;
        }
         public int Id { get; set; }
         public string Care { get; set; }

@@ -18,7 +18,8 @@ namespace WebApplication.Models
             IdWatering = plants.IdWatering;
             IdLighting = plants.IdLighting;
             IdSpraying = plants.IdSpraying;
-            IdSpecies = plants.IdSpecies;
+            IdView = plants.IdView;
+            Link = plants.Link;
         }
         public int Id { get; set; }
         public string Title { get; set; }
@@ -29,6 +30,7 @@ namespace WebApplication.Models
         public int IdWatering { get; set; }
         public int IdLighting { get; set; }
         public int IdSpraying { get; set; }
-        public int IdSpecies { get; set; }
+        public int IdView { get; set; }
+        public string Link { get; set; }
     }
 }

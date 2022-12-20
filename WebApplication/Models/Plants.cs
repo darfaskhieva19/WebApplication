@@ -14,6 +14,12 @@ namespace WebApplication.Models
     
     public partial class Plants
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Plants()
+        {
+            this.PlantReminder = new HashSet<PlantReminder>();
+        }
+    
         public int Id { get; set; }
         public string Title { get; set; }
         public string Description { get; set; }
@@ -23,13 +29,16 @@ namespace WebApplication.Models
         public int IdWatering { get; set; }
         public int IdLighting { get; set; }
         public int IdSpraying { get; set; }
-        public int IdSpecies { get; set; }
+        public int IdView { get; set; }
+        public string Link { get; set; }
     
         public virtual PlantCare PlantCare { get; set; }
         public virtual PlantLighting PlantLighting { get; set; }
-        public virtual ViewPlants ViewPlants { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<PlantReminder> PlantReminder { get; set; }
         public virtual SprayingPlants SprayingPlants { get; set; }
         public virtual TypePlants TypePlants { get; set; }
+        public virtual ViewPlants ViewPlants { get; set; }
         public virtual WateringPlants WateringPlants { get; set; }
     }
 }

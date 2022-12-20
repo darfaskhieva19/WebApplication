@@ -10,7 +10,7 @@ namespace WebApplication.Models
         public WateringModel(WateringPlants water)
         {
             Id= water.Id;
-            Watering = water.Watering1;
+            Watering = water.Watering;
         }
 
        public int Id { get; set; }

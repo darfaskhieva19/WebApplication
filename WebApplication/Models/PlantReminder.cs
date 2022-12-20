@@ -12,18 +12,15 @@ namespace WebApplication.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class PlantCare
+    public partial class PlantReminder
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public PlantCare()
-        {
-            this.Plants = new HashSet<Plants>();
-        }
-    
         public int Id { get; set; }
-        public string Care { get; set; }
+        public string ReminderMode { get; set; }
+        public System.DateTime ReminderDate { get; set; }
+        public System.TimeSpan ReminderTime { get; set; }
+        public int IdPlant { get; set; }
+        public string Notes { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Plants> Plants { get; set; }
+        public virtual Plants Plants { get; set; }
     }
 }

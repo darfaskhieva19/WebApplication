@@ -10,7 +10,7 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="PlantCare" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Care" Type="nvarchar" MaxLength="50" Nullable="false" />
         </EntityType>
         <EntityType Name="PlantLighting">
           <Key>
@@ -18,6 +18,17 @@
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Lighting" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PlantReminder">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ReminderMode" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="ReminderDate" Type="date" Nullable="false" />
+          <Property Name="ReminderTime" Type="time" Precision="7" Nullable="false" />
+          <Property Name="IdPlant" Type="int" Nullable="false" />
+          <Property Name="Notes" Type="nvarchar(max)" />
         </EntityType>
         <EntityType Name="Plants">
           <Key>
@@ -32,7 +43,8 @@
           <Property Name="IdWatering" Type="int" Nullable="false" />
           <Property Name="IdLighting" Type="int" Nullable="false" />
           <Property Name="IdSpraying" Type="int" Nullable="false" />
-          <Property Name="IdSpecies" Type="int" Nullable="false" />
+          <Property Name="IdView" Type="int" Nullable="false" />
+          <Property Name="Link" Type="nvarchar(max)" Nullable="false" />
         </EntityType>
         <EntityType Name="SprayingPlants">
           <Key>
@@ -60,17 +72,17 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="WateringPlants" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Watering" Type="nvarchar" MaxLength="50" Nullable="false" />
         </EntityType>
-        <Association Name="FK_Plants_Kinds">
-          <End Role="ViewPlants" Type="Self.ViewPlants" Multiplicity="1" />
-          <End Role="Plants" Type="Self.Plants" Multiplicity="*" />
+        <Association Name="FK_PlantReminder_Plants">
+          <End Role="Plants" Type="Self.Plants" Multiplicity="1" />
+          <End Role="PlantReminder" Type="Self.PlantReminder" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="ViewPlants">
+            <Principal Role="Plants">
               <PropertyRef Name="Id" />
             </Principal>
-            <Dependent Role="Plants">
-              <PropertyRef Name="IdSpecies" />
+            <Dependent Role="PlantReminder">
+              <PropertyRef Name="IdPlant" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -110,7 +122,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Plants_Type">
+        <Association Name="FK_Plants_TypePlants">
           <End Role="TypePlants" Type="Self.TypePlants" Multiplicity="1" />
           <End Role="Plants" Type="Self.Plants" Multiplicity="*" />
           <ReferentialConstraint>
@@ -119,6 +131,18 @@
             </Principal>
             <Dependent Role="Plants">
               <PropertyRef Name="IdType" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Plants_ViewPlants">
+          <End Role="ViewPlants" Type="Self.ViewPlants" Multiplicity="1" />
+          <End Role="Plants" Type="Self.Plants" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ViewPlants">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Plants">
+              <PropertyRef Name="IdView" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -137,14 +161,15 @@
         <EntityContainer Name="Хранилище P_Faskhieva_MobileProjectModelContainer">
           <EntitySet Name="PlantCare" EntityType="Self.PlantCare" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PlantLighting" EntityType="Self.PlantLighting" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PlantReminder" EntityType="Self.PlantReminder" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Plants" EntityType="Self.Plants" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SprayingPlants" EntityType="Self.SprayingPlants" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TypePlants" EntityType="Self.TypePlants" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ViewPlants" EntityType="Self.ViewPlants" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="WateringPlants" EntityType="Self.WateringPlants" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="FK_Plants_Kinds" Association="Self.FK_Plants_Kinds">
-            <End Role="ViewPlants" EntitySet="ViewPlants" />
+          <AssociationSet Name="FK_PlantReminder_Plants" Association="Self.FK_PlantReminder_Plants">
             <End Role="Plants" EntitySet="Plants" />
+            <End Role="PlantReminder" EntitySet="PlantReminder" />
           </AssociationSet>
           <AssociationSet Name="FK_Plants_PlantCare" Association="Self.FK_Plants_PlantCare">
             <End Role="PlantCare" EntitySet="PlantCare" />
@@ -158,8 +183,12 @@
             <End Role="SprayingPlants" EntitySet="SprayingPlants" />
             <End Role="Plants" EntitySet="Plants" />
           </AssociationSet>
-          <AssociationSet Name="FK_Plants_Type" Association="Self.FK_Plants_Type">
+          <AssociationSet Name="FK_Plants_TypePlants" Association="Self.FK_Plants_TypePlants">
             <End Role="TypePlants" EntitySet="TypePlants" />
+            <End Role="Plants" EntitySet="Plants" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Plants_ViewPlants" Association="Self.FK_Plants_ViewPlants">
+            <End Role="ViewPlants" EntitySet="ViewPlants" />
             <End Role="Plants" EntitySet="Plants" />
           </AssociationSet>
           <AssociationSet Name="FK_Plants_WateringPlants" Association="Self.FK_Plants_WateringPlants">
@@ -174,6 +203,7 @@
         <EntityContainer Name="PlantsEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="PlantCare" EntityType="P_Faskhieva_MobileProjectModel.PlantCare" />
           <EntitySet Name="PlantLighting" EntityType="P_Faskhieva_MobileProjectModel.PlantLighting" />
+          <EntitySet Name="PlantReminder" EntityType="P_Faskhieva_MobileProjectModel.PlantReminder" />
           <EntitySet Name="Plants" EntityType="P_Faskhieva_MobileProjectModel.Plants" />
           <EntitySet Name="SprayingPlants" EntityType="P_Faskhieva_MobileProjectModel.SprayingPlants" />
           <EntitySet Name="TypePlants" EntityType="P_Faskhieva_MobileProjectModel.TypePlants" />
@@ -187,16 +217,20 @@
             <End Role="PlantLighting" EntitySet="PlantLighting" />
             <End Role="Plants" EntitySet="Plants" />
           </AssociationSet>
-          <AssociationSet Name="FK_Plants_Kinds" Association="P_Faskhieva_MobileProjectModel.FK_Plants_Kinds">
-            <End Role="ViewPlants" EntitySet="ViewPlants" />
+          <AssociationSet Name="FK_PlantReminder_Plants" Association="P_Faskhieva_MobileProjectModel.FK_PlantReminder_Plants">
             <End Role="Plants" EntitySet="Plants" />
+            <End Role="PlantReminder" EntitySet="PlantReminder" />
           </AssociationSet>
           <AssociationSet Name="FK_Plants_SprayingPlants" Association="P_Faskhieva_MobileProjectModel.FK_Plants_SprayingPlants">
             <End Role="SprayingPlants" EntitySet="SprayingPlants" />
             <End Role="Plants" EntitySet="Plants" />
           </AssociationSet>
-          <AssociationSet Name="FK_Plants_Type" Association="P_Faskhieva_MobileProjectModel.FK_Plants_Type">
+          <AssociationSet Name="FK_Plants_TypePlants" Association="P_Faskhieva_MobileProjectModel.FK_Plants_TypePlants">
             <End Role="TypePlants" EntitySet="TypePlants" />
+            <End Role="Plants" EntitySet="Plants" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Plants_ViewPlants" Association="P_Faskhieva_MobileProjectModel.FK_Plants_ViewPlants">
+            <End Role="ViewPlants" EntitySet="ViewPlants" />
             <End Role="Plants" EntitySet="Plants" />
           </AssociationSet>
           <AssociationSet Name="FK_Plants_WateringPlants" Association="P_Faskhieva_MobileProjectModel.FK_Plants_WateringPlants">
@@ -209,7 +243,7 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Care1" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Care" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Plants" Relationship="P_Faskhieva_MobileProjectModel.FK_Plants_PlantCare" FromRole="PlantCare" ToRole="Plants" />
         </EntityType>
         <EntityType Name="PlantLighting">
@@ -219,6 +253,18 @@
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Lighting" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Plants" Relationship="P_Faskhieva_MobileProjectModel.FK_Plants_PlantLighting" FromRole="PlantLighting" ToRole="Plants" />
+        </EntityType>
+        <EntityType Name="PlantReminder">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ReminderMode" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ReminderDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="ReminderTime" Type="Time" Nullable="false" Precision="7" />
+          <Property Name="IdPlant" Type="Int32" Nullable="false" />
+          <Property Name="Notes" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Plants" Relationship="P_Faskhieva_MobileProjectModel.FK_PlantReminder_Plants" FromRole="PlantReminder" ToRole="Plants" />
         </EntityType>
         <EntityType Name="Plants">
           <Key>
@@ -233,12 +279,14 @@
           <Property Name="IdWatering" Type="Int32" Nullable="false" />
           <Property Name="IdLighting" Type="Int32" Nullable="false" />
           <Property Name="IdSpraying" Type="Int32" Nullable="false" />
-          <Property Name="IdSpecies" Type="Int32" Nullable="false" />
+          <Property Name="IdView" Type="Int32" Nullable="false" />
+          <Property Name="Link" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="PlantCare" Relationship="P_Faskhieva_MobileProjectModel.FK_Plants_PlantCare" FromRole="Plants" ToRole="PlantCare" />
           <NavigationProperty Name="PlantLighting" Relationship="P_Faskhieva_MobileProjectModel.FK_Plants_PlantLighting" FromRole="Plants" ToRole="PlantLighting" />
-          <NavigationProperty Name="ViewPlants" Relationship="P_Faskhieva_MobileProjectModel.FK_Plants_Kinds" FromRole="Plants" ToRole="ViewPlants" />
+          <NavigationProperty Name="PlantReminder" Relationship="P_Faskhieva_MobileProjectModel.FK_PlantReminder_Plants" FromRole="Plants" ToRole="PlantReminder" />
           <NavigationProperty Name="SprayingPlants" Relationship="P_Faskhieva_MobileProjectModel.FK_Plants_SprayingPlants" FromRole="Plants" ToRole="SprayingPlants" />
-          <NavigationProperty Name="TypePlants" Relationship="P_Faskhieva_MobileProjectModel.FK_Plants_Type" FromRole="Plants" ToRole="TypePlants" />
+          <NavigationProperty Name="TypePlants" Relationship="P_Faskhieva_MobileProjectModel.FK_Plants_TypePlants" FromRole="Plants" ToRole="TypePlants" />
+          <NavigationProperty Name="ViewPlants" Relationship="P_Faskhieva_MobileProjectModel.FK_Plants_ViewPlants" FromRole="Plants" ToRole="ViewPlants" />
           <NavigationProperty Name="WateringPlants" Relationship="P_Faskhieva_MobileProjectModel.FK_Plants_WateringPlants" FromRole="Plants" ToRole="WateringPlants" />
         </EntityType>
         <EntityType Name="SprayingPlants">
@@ -255,7 +303,7 @@
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Type" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Plants" Relationship="P_Faskhieva_MobileProjectModel.FK_Plants_Type" FromRole="TypePlants" ToRole="Plants" />
+          <NavigationProperty Name="Plants" Relationship="P_Faskhieva_MobileProjectModel.FK_Plants_TypePlants" FromRole="TypePlants" ToRole="Plants" />
         </EntityType>
         <EntityType Name="ViewPlants">
           <Key>
@@ -263,14 +311,14 @@
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Views" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Plants" Relationship="P_Faskhieva_MobileProjectModel.FK_Plants_Kinds" FromRole="ViewPlants" ToRole="Plants" />
+          <NavigationProperty Name="Plants" Relationship="P_Faskhieva_MobileProjectModel.FK_Plants_ViewPlants" FromRole="ViewPlants" ToRole="Plants" />
         </EntityType>
         <EntityType Name="WateringPlants">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Watering1" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Watering" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Plants" Relationship="P_Faskhieva_MobileProjectModel.FK_Plants_WateringPlants" FromRole="WateringPlants" ToRole="Plants" />
         </EntityType>
         <Association Name="FK_Plants_PlantCare">
@@ -297,15 +345,15 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Plants_Kinds">
-          <End Type="P_Faskhieva_MobileProjectModel.ViewPlants" Role="ViewPlants" Multiplicity="1" />
-          <End Type="P_Faskhieva_MobileProjectModel.Plants" Role="Plants" Multiplicity="*" />
+        <Association Name="FK_PlantReminder_Plants">
+          <End Type="P_Faskhieva_MobileProjectModel.Plants" Role="Plants" Multiplicity="1" />
+          <End Type="P_Faskhieva_MobileProjectModel.PlantReminder" Role="PlantReminder" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="ViewPlants">
+            <Principal Role="Plants">
               <PropertyRef Name="Id" />
             </Principal>
-            <Dependent Role="Plants">
-              <PropertyRef Name="IdSpecies" />
+            <Dependent Role="PlantReminder">
+              <PropertyRef Name="IdPlant" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -321,7 +369,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Plants_Type">
+        <Association Name="FK_Plants_TypePlants">
           <End Type="P_Faskhieva_MobileProjectModel.TypePlants" Role="TypePlants" Multiplicity="1" />
           <End Type="P_Faskhieva_MobileProjectModel.Plants" Role="Plants" Multiplicity="*" />
           <ReferentialConstraint>
@@ -330,6 +378,18 @@
             </Principal>
             <Dependent Role="Plants">
               <PropertyRef Name="IdType" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Plants_ViewPlants">
+          <End Type="P_Faskhieva_MobileProjectModel.ViewPlants" Role="ViewPlants" Multiplicity="1" />
+          <End Type="P_Faskhieva_MobileProjectModel.Plants" Role="Plants" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ViewPlants">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Plants">
+              <PropertyRef Name="IdView" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -345,7 +405,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-      </Schema>
+        </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
@@ -354,7 +414,7 @@
           <EntitySetMapping Name="PlantCare">
             <EntityTypeMapping TypeName="P_Faskhieva_MobileProjectModel.PlantCare">
               <MappingFragment StoreEntitySet="PlantCare">
-                <ScalarProperty Name="Care1" ColumnName="PlantCare" />
+                <ScalarProperty Name="Care" ColumnName="Care" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -367,10 +427,23 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="PlantReminder">
+            <EntityTypeMapping TypeName="P_Faskhieva_MobileProjectModel.PlantReminder">
+              <MappingFragment StoreEntitySet="PlantReminder">
+                <ScalarProperty Name="Notes" ColumnName="Notes" />
+                <ScalarProperty Name="IdPlant" ColumnName="IdPlant" />
+                <ScalarProperty Name="ReminderTime" ColumnName="ReminderTime" />
+                <ScalarProperty Name="ReminderDate" ColumnName="ReminderDate" />
+                <ScalarProperty Name="ReminderMode" ColumnName="ReminderMode" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="Plants">
             <EntityTypeMapping TypeName="P_Faskhieva_MobileProjectModel.Plants">
               <MappingFragment StoreEntitySet="Plants">
-                <ScalarProperty Name="IdSpecies" ColumnName="IdSpecies" />
+                <ScalarProperty Name="Link" ColumnName="Link" />
+                <ScalarProperty Name="IdView" ColumnName="IdView" />
                 <ScalarProperty Name="IdSpraying" ColumnName="IdSpraying" />
                 <ScalarProperty Name="IdLighting" ColumnName="IdLighting" />
                 <ScalarProperty Name="IdWatering" ColumnName="IdWatering" />
@@ -410,7 +483,7 @@
           <EntitySetMapping Name="WateringPlants">
             <EntityTypeMapping TypeName="P_Faskhieva_MobileProjectModel.WateringPlants">
               <MappingFragment StoreEntitySet="WateringPlants">
-                <ScalarProperty Name="Watering1" ColumnName="WateringPlants" />
+                <ScalarProperty Name="Watering" ColumnName="Watering" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>

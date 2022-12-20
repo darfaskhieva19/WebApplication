@@ -166,6 +166,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\PlantCaresController.cs" />
     <Compile Include="Controllers\PlantLightingsController.cs" />
+    <Compile Include="Controllers\PlantRemindersController.cs" />
     <Compile Include="Controllers\PlantsController.cs" />
     <Compile Include="Controllers\SprayingPlantsController.cs" />
     <Compile Include="Controllers\TypePlantsController.cs" />
@@ -199,9 +200,13 @@
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\PlantModel.cs" />
+    <Compile Include="Models\PlantReminder.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Plants.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\ReminderModel.cs" />
     <Compile Include="Models\SprayingModel.cs" />
     <Compile Include="Models\SprayingPlants.cs">
       <DependentUpon>Model1.tt</DependentUpon>
