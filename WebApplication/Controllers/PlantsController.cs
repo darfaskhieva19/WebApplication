@@ -9,12 +9,48 @@ using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Description;
 using WebApplication.Models;
-
 namespace WebApplication.Controllers
 {
     public class PlantsController : ApiController
     {
         private PlantsEntities db = new PlantsEntities();
+
+        [Route("api/Plants/Filter")]
+        [HttpGet]
+        [ResponseType(typeof(List<PlantModel>))]
+        public IHttpActionResult FilterPlants(string sort, string care, string spraying, string watering, string lighting)
+        {
+            List<Plants> list = db.Plants.ToList();
+            if(sort!="по умолчанию")
+            {
+                if(sort=="по возрастанию")
+                {
+                    list = list.OrderBy(z => z.Title).ToList();
+                }
+                else
+                {
+                    list = list.OrderByDescending(z => z.Title).ToList();
+                }
+            }
+            if(care!="Весь уход")
+            {
+                list = list.Where(z => z.PlantCare.Care == care).ToList();
+            }
+            if(spraying!="Все опрыскивание")
+            {
+                list = list.Where(z => z.SprayingPlants.Spraying == spraying).ToList();
+            }
+            if(watering!="Весь полив")
+            {
+                list = list.Where(z => z.WateringPlants.Watering == watering).ToList();
+            }
+            if(lighting!="Все освещение")
+            {
+                list = list.Where(z => z.PlantLighting.Lighting == lighting).ToList();
+            }
+            return Ok(list.ConvertAll(z => new PlantModel(z)));
+        }
+
 
         // GET: api/Plants
         [ResponseType(typeof(List<PlantModel>))]
