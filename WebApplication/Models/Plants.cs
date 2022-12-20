@@ -24,12 +24,10 @@ namespace WebApplication.Models
         public string Title { get; set; }
         public string Description { get; set; }
         public string Photo { get; set; }
-        public int IdType { get; set; }
         public int IdCare { get; set; }
         public int IdWatering { get; set; }
         public int IdLighting { get; set; }
         public int IdSpraying { get; set; }
-        public int IdView { get; set; }
         public string Link { get; set; }
     
         public virtual PlantCare PlantCare { get; set; }
@@ -37,8 +35,6 @@ namespace WebApplication.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<PlantReminder> PlantReminder { get; set; }
         public virtual SprayingPlants SprayingPlants { get; set; }
-        public virtual TypePlants TypePlants { get; set; }
-        public virtual ViewPlants ViewPlants { get; set; }
         public virtual WateringPlants WateringPlants { get; set; }
     }
 }

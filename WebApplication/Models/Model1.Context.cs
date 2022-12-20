@@ -30,8 +30,6 @@ namespace WebApplication.Models
         public virtual DbSet<PlantReminder> PlantReminder { get; set; }
         public virtual DbSet<Plants> Plants { get; set; }
         public virtual DbSet<SprayingPlants> SprayingPlants { get; set; }
-        public virtual DbSet<TypePlants> TypePlants { get; set; }
-        public virtual DbSet<ViewPlants> ViewPlants { get; set; }
         public virtual DbSet<WateringPlants> WateringPlants { get; set; }
     }
 }

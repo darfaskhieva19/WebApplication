@@ -169,9 +169,7 @@
     <Compile Include="Controllers\PlantRemindersController.cs" />
     <Compile Include="Controllers\PlantsController.cs" />
     <Compile Include="Controllers\SprayingPlantsController.cs" />
-    <Compile Include="Controllers\TypePlantsController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
-    <Compile Include="Controllers\ViewPlantsController.cs" />
     <Compile Include="Controllers\WateringPlantsController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -209,14 +207,6 @@
     <Compile Include="Models\ReminderModel.cs" />
     <Compile Include="Models\SprayingModel.cs" />
     <Compile Include="Models\SprayingPlants.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\TypeModel.cs" />
-    <Compile Include="Models\TypePlants.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\ViewModel.cs" />
-    <Compile Include="Models\ViewPlants.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\WateringModel.cs" />

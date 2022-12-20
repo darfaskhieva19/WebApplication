@@ -5,20 +5,16 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="0366f7db4f5e4ae5af9deb714eb37ea6" Name="Diagram1">
-        <EntityTypeShape EntityType="P_Faskhieva_MobileProjectModel.PlantCare" Width="1.5" PointX="0.75" PointY="8" />
-        <EntityTypeShape EntityType="P_Faskhieva_MobileProjectModel.PlantLighting" Width="1.5" PointX="0.75" PointY="5.625" />
-        <EntityTypeShape EntityType="P_Faskhieva_MobileProjectModel.PlantReminder" Width="1.5" PointX="5.25" PointY="2.125" />
+        <EntityTypeShape EntityType="P_Faskhieva_MobileProjectModel.PlantCare" Width="1.5" PointX="0.75" PointY="9.875" />
+        <EntityTypeShape EntityType="P_Faskhieva_MobileProjectModel.PlantLighting" Width="1.5" PointX="0.75" PointY="7.5" />
+        <EntityTypeShape EntityType="P_Faskhieva_MobileProjectModel.PlantReminder" Width="1.5" PointX="5.25" PointY="1.625" />
         <EntityTypeShape EntityType="P_Faskhieva_MobileProjectModel.Plants" Width="1.5" PointX="3" PointY="1" />
-        <EntityTypeShape EntityType="P_Faskhieva_MobileProjectModel.SprayingPlants" Width="1.5" PointX="0.75" PointY="12.625" />
-        <EntityTypeShape EntityType="P_Faskhieva_MobileProjectModel.TypePlants" Width="1.5" PointX="0.75" PointY="10.375" />
-        <EntityTypeShape EntityType="P_Faskhieva_MobileProjectModel.ViewPlants" Width="1.5" PointX="0.75" PointY="2.5" />
-        <EntityTypeShape EntityType="P_Faskhieva_MobileProjectModel.WateringPlants" Width="1.5" PointX="0.75" PointY="15" />
+        <EntityTypeShape EntityType="P_Faskhieva_MobileProjectModel.SprayingPlants" Width="1.5" PointX="0.75" PointY="2.125" />
+        <EntityTypeShape EntityType="P_Faskhieva_MobileProjectModel.WateringPlants" Width="1.5" PointX="0.75" PointY="5.25" />
         <AssociationConnector Association="P_Faskhieva_MobileProjectModel.FK_Plants_PlantCare" />
         <AssociationConnector Association="P_Faskhieva_MobileProjectModel.FK_Plants_PlantLighting" />
         <AssociationConnector Association="P_Faskhieva_MobileProjectModel.FK_PlantReminder_Plants" />
         <AssociationConnector Association="P_Faskhieva_MobileProjectModel.FK_Plants_SprayingPlants" />
-        <AssociationConnector Association="P_Faskhieva_MobileProjectModel.FK_Plants_TypePlants" />
-        <AssociationConnector Association="P_Faskhieva_MobileProjectModel.FK_Plants_ViewPlants" />
         <AssociationConnector Association="P_Faskhieva_MobileProjectModel.FK_Plants_WateringPlants" />
       </Diagram>
     </edmx:Diagrams>
