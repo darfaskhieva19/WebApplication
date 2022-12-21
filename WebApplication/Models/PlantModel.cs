@@ -13,20 +13,21 @@ namespace WebApplication.Models
             Title = plants.Title;
             Description = plants.Description;
             Photo = plants.Photo;
-            IdCare = plants.IdCare;
-            IdWatering = plants.IdWatering;
-            IdLighting = plants.IdLighting;
-            IdSpraying = plants.IdSpraying;
+            Care = plants.PlantCare.Care;
+            Watering = plants.WateringPlants.Watering;
+            Lighting = plants.PlantLighting.Lighting;
+            Spraying = plants.SprayingPlants.Spraying;
             Link = plants.Link;
+
         }
         public int Id { get; set; }
         public string Title { get; set; }
         public string Description { get; set; }
         public string Photo { get; set; }
-        public int IdCare { get; set; }
-        public int IdWatering { get; set; }
-        public int IdLighting { get; set; }
-        public int IdSpraying { get; set; }
+        public string Care { get; set; }
+        public string Watering { get; set; }
+        public string Lighting { get; set; }
+        public string Spraying { get; set; }
         public string Link { get; set; }
     }
 }
